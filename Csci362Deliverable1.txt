@@ -1,0 +1,56 @@
+1-Martus
+
+Description-
+the Greek word for "witness," is a software tool that allows 
+users to document incidents of abuse by creating bulletins, and storing them 
+on redundant servers located around the world. Using Martus helps countries 
+torn apart by civil conflicts come to a consensus and rational understanding 
+of their histories, leading to reconciliation and reform processes.
+
+Reasons-
+I like this one because false information plagues our society regardless of 
+relegious or political beliefs. an informatin database like this one is 
+something that would be very difficult to keep unbiased but well worth the 
+effort as human rights are one thing that should transcend any polotical or 
+cultural struggles. and it would create a hub of people who have all been 
+through the same attrocious experience and give abuse victims a steadfast 
+place to turn to if they are being abused.
+
+
+2-Sugar Labs	
+
+Description-
+Spin-off from OLPC (one laptop per child) that is doing software to create 
+a learning environment for children. The award-winning Sugar Learning Platform 
+promotes collaborative learning through Sugar Activities that encourage 
+critical thinking, the heart of a quality education. Designed from the ground 
+up especially for children, Sugar offers an alternative to traditional 
+“office-desktop” software.
+
+Reasons-
+Sugar is an interactive learning environment developed by SugarLabs that aims to
+ provide an accessible, fun learning environment for children around the world. 
+While it can only run on Linux, Sugar nonetheless appears to be very accessible, 
+able to be installed and used in a variety of ways (e.g “Sugar on a Stick” and 
+Raspberry Pi). Obviously, we love the idea of software that is provided for free 
+and can be used for social good. We recognize the importance of such software in 
+creating equal oppopportunity and quality education and would love to contribute 
+to its continued functionality and improvement.
+
+
+3-Epidemiological Modeler(STEM)
+
+Description-
+A tool designed to help scientists and public 
+health officials create and use spatial and temporal models of emerging infectious 
+diseases. These models can aid in understanding and potentially preventing the 
+spread of such diseases.
+
+Reasons-
+this Tool is extremely useful in the improvement of society, ensuring that our
+population will be able to survive the next big pandemic/outbreak of a disease. After 
+watching our society deal with covid it is clear software's like these are neccessary 
+to ensure the long term survival of the human population. More than that this software 
+also has applications of being preventitive if research. If research biologists are able 
+to create new viruses and model/solve their problems to be able to deal witrh their 
+side effects more effectively, then we might be able to entirely avoid the next pandemic.
