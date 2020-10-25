@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd ../TestCaseExecutables
-find -path ".*.class"
-echo "java"
-
+cd ../project/src/org/eclipse/stem/test/driver/
+find -regex ".*.java" -exec javac -cp "../../../../../../dependencies/*" {} \;
+pwd
