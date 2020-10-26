@@ -1,5 +1,6 @@
 #!/bin/bash
 
 cd ../project/src/org/eclipse/stem/test/driver/
-find -regex ".*.java" -exec javac -cp "../../../../../../dependencies/*" {} \;
+find -name "*.java" -print -a -exec javac -cp "../../../../../../dependencies/*" {} \;
+find -mindepth 1 -maxdepth 1 -type d \( -exec cp -r {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
 pwd
