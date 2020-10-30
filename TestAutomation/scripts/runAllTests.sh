@@ -6,11 +6,14 @@ while IFS= read -r line; do
 	n=$((n+1));
 done < data/driverlist.txt
 
-cd ../project/bin
+cd ../testCases/
 
 n=1
 while [[ $n -le ${#drivers[@]} ]]
-do
+do	
+	test_case_folder=$(echo ${drivers[$n]} | tr . /) 
+	cd $test_case_folder
+	
 	java -cp ".:../dependencies/*" ${drivers[$n]};
 	n=$((n+1));
 done
