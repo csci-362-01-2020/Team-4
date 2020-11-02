@@ -1,19 +1,24 @@
 #!/bin/bash
 
-n=1
-while IFS= read -r line; do
-	drivers[$n]=$line;
-	n=$((n+1));
-done < data/driverlist.txt
+cd ../testCases/workingTestCases
 
-cd ../testCases/
+readarray test_nums < <(find -name "*.txt" -exec awk '{if(NR==1) print $0}' '{}' \;)
+readarray drivers < <(find -name "*.txt" -exec awk '{if(NR==5) print $0}' '{}' \;)
+readarray inputs < <(find -name "*.txt" -exec awk '{if(NR==6) print $0}' '{}' \;)
+readarray outputs < <(find -name "*.txt" -exec awk '{if(NR==7) print $0}' '{}' \;)
 
-n=1
-while [[ $n -le ${#drivers[@]} ]]
+cd ../../testCasesExecutables
+for ind in ${!drivers[@]}
 do	
-	test_case_folder=$(echo ${drivers[$n]} | tr . /) 
-	cd $test_case_folder
+	test_num=$(echo ${test_nums[ind]} | awk '{sub(/Test Number: /,"")} 1' );
+	driver=$(echo ${drivers[ind]} | awk '{sub(/Driver: /,"")} 1' );
+	input=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1' | tr -d ',');
+	output=$(echo ${outputs[ind]} | awk '{sub(/Outputs: /,"")} 1' | tr -d ',');
 	
-	java -cp ".:../dependencies/*" ${drivers[$n]};
-	n=$((n+1));
+	echo "Executing test case $test_num for:";
+	echo "Driver: $driver";
+	echo "Inputs: $input";
+	echo "Outputs: $output";
+	
+	java -cp ".:../project/dependencies/*" $driver $input;
 done

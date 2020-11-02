@@ -1,1 +1,0 @@
-	awk '{if(NR==5) print $0}' testCase1.txt | tr -d "Inputs:" | tr -d " "
