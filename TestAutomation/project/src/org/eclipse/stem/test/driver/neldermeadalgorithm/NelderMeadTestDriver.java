@@ -1,9 +1,10 @@
 package org.eclipse.stem.test.driver.neldermeadalgorithm;
 
 import java.util.Arrays;
-
+import java.util.ArrayList;
 import java.lang.reflect.*;
 
+import org.eclipse.stem.test.driver.TestReporter;
 import org.eclipse.stem.analysis.ErrorResult;
 import org.eclipse.stem.analysis.AnalysisPackage;
 import org.eclipse.stem.analysis.automaticexperiment.SimplexFunction;
@@ -13,33 +14,37 @@ public class NelderMeadTestDriver {
 
 	public static void main(String[] args) {
 		try {	
+			// Instantiate test reporter with driver, test number, and oracles
+			String testCase = args[14];
+			ArrayList<String> oracle = new ArrayList<>(Arrays.asList(args[11], args[12], args[13]));
+			TestReporter tr = new TestReporter(NelderMeadTestDriver.class, testCase, oracle);
+			
 			Class<?> sf = ClassLoader.getSystemClassLoader().loadClass(
 				"org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver$" + args[10]);
+				
 			NelderMeadAlgorithm nelder = new NelderMeadAlgorithm();
 			nelder.setParameterLimits(Integer.parseInt(args[0]), Double.parseDouble(args[1]),
 							 Double.parseDouble(args[2]));
                 	nelder.setParameterLimits(Integer.parseInt(args[3]), Double.parseDouble(args[4]),
 							 Double.parseDouble(args[5]));
-                	//nelder.setParameterLimits(0, 0.0, 9999999.0);
-                	//nelder.setParameterLimits(1, 0.0, 9999999.0);
                 	double[] initStart = { Double.parseDouble(args[6]), Double.parseDouble(args[7]) };
-		        double[] step = { Double.parseDouble(args[8]), Double.parseDouble(args[9]) };
-		        //double[] initStart = { 1.8, 1.2 };
-		        //double[] step = { 0.5, 0.5 };
+		        double[] step = { Double.parseDouble(args[8]), Double.parseDouble(args[9]) };	        
 		        nelder.execute((SimplexFunction) sf.newInstance(), initStart, step, 0.01, -1);
-		        //nelder.execute((SimplexFunction) sfConstructor.newInstance(), initStart, step, 0.01, -1);
 		        
-		        //System.out.println("Results:");
-		        //System.out.println("Minimum Parameters - " +
-		        	//Arrays.toString(nelder.getMinimumParametersValues()));
-		        //System.out.println("Minimum Function Value - " +
-		        	//nelder.getMinimumFunctionValue());
-		        System.out.println(Math.round(nelder.getMinimumParametersValues()[0]));
-		        System.out.println(Math.round(nelder.getMinimumParametersValues()[1]));
-		        System.out.println(Math.round(nelder.getMinimumFunctionValue()));
-			//boolean minParmVal_X = Math.round(nelder.getMinimumParametersValues()[0]) == 2;
-			//boolean minParmVal_Y = Math.round(nelder.getMinimumParametersValues()[1]) == 1;
-			//boolean minFuncVal = Math.round(nelder.getMinimumFunctionValue()) == -4;
+		        long minParmVal_X = Math.round(nelder.getMinimumParametersValues()[0]);
+		        long minParmVal_Y = Math.round(nelder.getMinimumParametersValues()[1]);
+			long minFuncVal = Math.round(nelder.getMinimumFunctionValue());
+		        
+		        // Report test
+			boolean minParmVal_X_passed = minParmVal_X == Integer.parseInt(args[11]);
+			boolean minParmVal_Y_passed = minParmVal_Y == Integer.parseInt(args[12]);
+			boolean minFuncVal_passed = minFuncVal == Integer.parseInt(args[13]);
+			tr.validate(minParmVal_X_passed && minParmVal_Y_passed && minFuncVal_passed);
+			tr.reportTest(new ArrayList<String>(Arrays.asList(
+				Long.toString(minParmVal_X),
+				Long.toString(minParmVal_Y),
+				Long.toString(minFuncVal))));
+			
 		
 		} catch(ClassNotFoundException | 
 				InstantiationException |

@@ -1,7 +1,7 @@
-Test Number: 1
+Test Number: 3
 Requirement: Function minimization
 Component: org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
 Method: execute()
 Driver: org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver
-Inputs: 0, 0.0, 9999999.0, 1, 0.0, 9999999.0, 1.8, 1.2, 0.5, 0.5, SampleFunction2
+Inputs: 0, 0.0, 9999999.0, 1, 0.0, 9999999.0, 1.6, 1.2, 0.5, 0.5, SampleFunction2
 Oracles: 2, 1, -4
