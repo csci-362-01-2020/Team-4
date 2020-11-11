@@ -14,13 +14,15 @@ import java.time.temporal.ChronoUnit;
 
 
 public class TestReporter {
-	private Class<?> driver;
+	private String driver;
+	private String method;
 	private String testNumber;
 	private ArrayList<String> expectedResult;
 	private boolean passed;
 	
-	public TestReporter(Class<?> c, String testNumber, ArrayList<String> oracle) {
-		this.driver = c;
+	public TestReporter(String clazz, String method, String testNumber, ArrayList<String> oracle) {
+		this.driver = clazz;
+		this.method = method;
 		this.testNumber = testNumber;
 		this.expectedResult = oracle;
 	}
@@ -32,12 +34,10 @@ public class TestReporter {
 	public void reportTest(ArrayList<String> computedResult) {
 		try {
 			Path reportPath = Paths.get("../temp/");
-			String[] driverPackageStruct = driver.getName().split("\\.");
-			String driverName = driverPackageStruct[driverPackageStruct.length-1];
 			StringBuilder sb = new StringBuilder();
 			sb.append(reportPath.toString());
 			sb.append("/");
-			sb.append(driverName);
+			sb.append(this.driver);
 			sb.append("_");
 			sb.append("testnumber" + this.testNumber);
 			sb.append("_");

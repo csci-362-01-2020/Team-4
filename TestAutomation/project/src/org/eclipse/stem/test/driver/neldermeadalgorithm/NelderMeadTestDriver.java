@@ -10,6 +10,7 @@ import org.eclipse.stem.analysis.AnalysisPackage;
 import org.eclipse.stem.analysis.automaticexperiment.SimplexFunction;
 import org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm;
 
+
 public class NelderMeadTestDriver {
 
 	public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class NelderMeadTestDriver {
 			// Instantiate test reporter with driver, test number, and oracles
 			String testCase = args[14];
 			ArrayList<String> oracle = new ArrayList<>(Arrays.asList(args[11], args[12], args[13]));
-			TestReporter tr = new TestReporter(NelderMeadTestDriver.class, testCase, oracle);
+			TestReporter tr = new TestReporter("NelderMeadTestDriver", "execute()", testCase, oracle);
 			
 			Class<?> sf = ClassLoader.getSystemClassLoader().loadClass(
 				"org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver$" + args[10]);
