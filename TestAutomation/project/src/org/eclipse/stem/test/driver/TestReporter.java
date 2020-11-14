@@ -14,17 +14,9 @@ import java.time.temporal.ChronoUnit;
 
 
 public class TestReporter {
-	private String driver;
-	private String method;
-	private String testNumber;
-	private ArrayList<String> expectedResult;
 	private boolean passed;
 	
-	public TestReporter(String clazz, String method, String testNumber, ArrayList<String> oracle) {
-		this.driver = clazz;
-		this.method = method;
-		this.testNumber = testNumber;
-		this.expectedResult = oracle;
+	public TestReporter() {
 	}
 	
 	public void validate(boolean passed) {
@@ -32,40 +24,8 @@ public class TestReporter {
 	}
 	
 	public void reportTest(ArrayList<String> computedResult) {
-		try {
-			Path reportPath = Paths.get("../temp/");
-			StringBuilder sb = new StringBuilder();
-			sb.append(reportPath.toString());
-			sb.append("/");
-			sb.append(this.driver);
-			sb.append("_");
-			sb.append("testnumber" + this.testNumber);
-			sb.append("_");
-			sb.append(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).toString());
-			sb.append(".txt");
-			
-			File report = new File(sb.toString());
-			report.createNewFile();
-			FileOutputStream fouts = new FileOutputStream(report);
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fouts));
-			if (this.passed == true) {
-				bw.write("Test number " + testNumber + ": Passed");
-			} else {
-				bw.write("Test number " + testNumber + ": Failed");
-			}
-			bw.newLine();
-			bw.write("----------------------------------------");
-			bw.newLine();
-			bw.write("Expected: " + expectedResult.toString());
-			bw.newLine();
-			bw.write("Computed: " + expectedResult.toString());
-			bw.newLine();
-			bw.write("----------------------------------------");
-			bw.close();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		
+		System.out.println(passed);
+		System.out.println(computedResult);
 	}
 	
 }
