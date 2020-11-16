@@ -1,4 +1,4 @@
-Test Number: 004
+Id: 004
 Requirement: Function minimization
 Component: org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
 Method: execute()

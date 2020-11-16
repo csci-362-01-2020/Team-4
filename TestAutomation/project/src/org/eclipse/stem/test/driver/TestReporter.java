@@ -24,7 +24,8 @@ public class TestReporter {
 	}
 	
 	public void reportTest(ArrayList<String> computedResult) {
-		System.out.println(passed);
+		if (passed) { System.out.println("Passed"); }
+		else { System.out.println("Failed"); }
 		System.out.println(computedResult);
 	}
 	
