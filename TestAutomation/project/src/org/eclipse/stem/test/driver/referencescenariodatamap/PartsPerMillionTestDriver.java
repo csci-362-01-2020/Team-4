@@ -27,7 +27,7 @@ public class PartsPerMillionTestDriver {
 		} else {
 			tr.validate(false);
 		}
-		tr.reportTest(new ArrayList<String>(Arrays.asList(Double.toString(diff))));
+		tr.reportTest(new ArrayList<String>(Arrays.asList(Boolean.toString(retVal), "diff: " + Double.toString(diff))));
 	}
 
 }

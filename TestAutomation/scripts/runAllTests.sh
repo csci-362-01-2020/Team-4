@@ -99,11 +99,13 @@ do
 	# Parse results of find commands to get test case info
 	test_num=$(echo ${test_nums[ind]} | awk '{sub(/Id: /,"")} 1' );
 	requirement=$(echo ${requirements[ind]} | awk '{sub(/Requirement: /,"")} 1' );
-	component=$(echo ${methods[ind]} | awk '{sub(/Component: /,"")} 1' );
+	component=$(echo ${components[ind]} | awk '{sub(/Component: /,"")} 1' );
 	method=$(echo ${methods[ind]} | awk '{sub(/Method: /,"")} 1' );
 	driver=$(echo ${drivers[ind]} | awk '{sub(/Driver: /,"")} 1' );
 	input=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1' | tr -d ',');
 	oracle=$(echo ${oracles[ind]} | awk '{sub(/Oracles: /,"")} 1' | tr -d ',');
+	input_for_display=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1');
+	oracle_for_display=$(echo ${oracles[ind]} | awk '{sub(/Oracles: /,"")} 1');
 
 	echo "Executing test case $test_num for:";
 	echo "Driver: $driver";
@@ -113,15 +115,15 @@ do
 	readarray results < <(java -cp ".:../project/dependencies/*" $driver $input $oracle $test_num)
 	
 	# Substitute test case information for placeholders in html document
-	new_table=${table/number/${test_nums[ind]}}
+	new_table=${table/number/$test_num}
 	new_table=${new_table/Passed_Failed/${results[0]}}
-	new_table=${new_table/driver/${drivers[ind]}}
-	new_table=${new_table/component/${components[ind]}}
-	new_table=${new_table/method/${methods[ind]}}
-	new_table=${new_table/requirement/${requirements[ind]}}
-	new_table=${new_table/test_input/${inputs[ind]}}
-	new_table=${new_table/expected_result/${results[1]}}
-	new_table=${new_table/computed_result/${oracles[ind]}}
+	new_table=${new_table/driver/$driver}
+	new_table=${new_table/component/$component}
+	new_table=${new_table/method/$method}
+	new_table=${new_table/requirement/$requirement}
+	new_table=${new_table/test_input/$input_for_display}
+	new_table=${new_table/expected_result/$oracle_for_display}
+	new_table=${new_table/computed_result/${results[1]}}
 	echo $new_table >> ../reports/temp.html
 done
 
