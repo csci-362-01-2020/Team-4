@@ -2,12 +2,16 @@ package org.eclipse.stem.test.driver.STEMtimetest;
 import org.eclipse.stem.core.model.ModelFactory;
 import org.eclipse.stem.core.model.STEMTime;
 import org.eclipse.stem.test.driver.TestReporter;
+import java.util.Date;
+import java.util.Arrays;
+import java.util.ArrayList;
+import org.eclipse.emf.ecore.EObject;
+
 
 public class STEMtimetest{
 
 	// One day's worth of milliseconds
-	private static final long TEST_INCREMENT;
-	protected STEMTime fixture = null;
+	protected long TEST_INCREMENT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -15,30 +19,17 @@ public class STEMtimetest{
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("hello");
+		int TEST_INCREMENT = Integer.parseInt(args[0]);
+		boolean oracle = Boolean.parseBoolean(args[1]);
 		
-	}
-
-	public void testAddIncrement__long() {
-		TEST_INCREMENT = args[0];
-		final STEMTime startTime = getFixture();
-		final STEMTime newTime = startTime.addIncrement(TEST_INCREMENT);
-		boolean compare1 = newTime.getTime().compareTo(startTime.getTime()) > 0;
+		STEMTime startTime = ModelFactory.eINSTANCE.createSTEMTime();
+		STEMTime newTime = startTime.addIncrement(TEST_INCREMENT);
 		boolean TestIncrement = newTime.getTime().getTime() - startTime.getTime().getTime() == TEST_INCREMENT;
-	} // testAddIncrement__long
 
-
-	public void testValueEquals__Object() {
-		final STEMTime time1 = getFixture();
-		final STEMTime time1a = getFixture();
-		time1.valueEquals(time1a);
-		final STEMTime time2 = time1a.addIncrement(TEST_INCREMENT);
-		time1.valueEquals(time2);
 		
-	}
-	
-	protected STEMTime getFixture() {
-		return fixture;
+		TestReporter tr = new TestReporter();
+		tr.validate(TestIncrement);
+		tr.reportTest(new ArrayList<String>(Arrays.asList(Boolean.toString(TestIncrement))));
 	}
 
 } // STEMTimeTest
