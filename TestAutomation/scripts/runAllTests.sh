@@ -96,7 +96,7 @@ table="
 
 "
 # Initialize html report document with header
-echo $header > ../reports/temp.html
+echo $header > ../reports/report.html
 
 # Parse test cases for test execution and reporting
 cd ../testCases/workingTestCases
@@ -136,10 +136,10 @@ do
 	new_table=${new_table/test_input/$input_for_display}
 	new_table=${new_table/expected_result/$oracle_for_display}
 	new_table=${new_table/computed_result/${results[1]}}
-	echo $new_table >> ../reports/temp.html
+	echo $new_table >> ../reports/report.html
 done
 
 # Append footer to html report document and display
-echo $footer >> ../reports/temp.html
+echo $footer >> ../reports/report.html
 
-sensible-browser ../reports/temp.html
+sensible-browser ../reports/report.html
