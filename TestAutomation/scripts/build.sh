@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd scripts
 cd ../project/src
 find -name "*.java" -print -a -exec javac -cp ".:../dependencies/*" {} \;
 cd org/eclipse/stem/test/driver/

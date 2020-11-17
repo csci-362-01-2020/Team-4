@@ -15,10 +15,7 @@ public class NelderMeadTestDriver {
 
 	public static void main(String[] args) {
 		try {	
-			// Instantiate test reporter with driver, test number, and oracles
-			String testCase = args[14];
-			ArrayList<String> oracle = new ArrayList<>(Arrays.asList(args[11], args[12], args[13]));
-			TestReporter tr = new TestReporter("NelderMeadTestDriver", "execute()", testCase, oracle);
+			TestReporter tr = new TestReporter(); // Just uses System.out to pass result of test to script
 			
 			Class<?> sf = ClassLoader.getSystemClassLoader().loadClass(
 				"org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver$" + args[10]);
