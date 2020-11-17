@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Build project
+cd scripts
+cd ../project/src
+find -name "*.java" -print -a -exec javac -cp ".:../dependencies/*" {} \;
+cd org/eclipse/stem/test/driver/
+# Copy TestReporter.class to testCasesExecutables
+find -mindepth 1 -maxdepth 1 -type f \( -exec cp {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
+# Copy rest of drivers to testCasesExecutables
+find -mindepth 1 -maxdepth 1 -type d \( -exec cp -r {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
+# Remove unnecessary files
+find -name "*.class" -exec rm {} \;
+cd ../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/
+find -name "*.java" -exec rm {} \;
+# Back to scripts directory
+cd ../../../../../../scripts
+
 # Construct template for html report document
 header="<!DOCTYPE html>
 
@@ -107,11 +123,7 @@ do
 	input_for_display=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1');
 	oracle_for_display=$(echo ${oracles[ind]} | awk '{sub(/Oracles: /,"")} 1');
 
-	echo "Executing test case $test_num for:";
-	echo "Driver: $driver";
-	echo "Inputs: $input";
-	echo "Oracles: $oracle";
-	# Did the test pass or fail? What was the output?
+	# Run test and get results. Did the test pass or fail? What was the output?
 	readarray results < <(java -cp ".:../project/dependencies/*" $driver $input $oracle $test_num)
 	
 	# Substitute test case information for placeholders in html document
