@@ -1,7 +1,7 @@
-Id: 005
-Requirement: Function minimization
-Component: org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
-Method: execute()
-Driver: org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver
-Inputs: 0, 0.0, 9999999.0, 1, 0.0, 9999999.0, 1.6, 1.2, 0.1, 0.1, SampleFunction
-Oracles: 3, 2, -7
+005
+Function minimization
+org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
+execute()
+org.eclipse.stem.test.driver.neldermeadalgorithm.NelderMeadTestDriver
+0, 0.0, 9999999.0, 1, 0.0, 9999999.0, 1.6, 1.2, 0.1, 0.1, SampleFunction
+3, 2, -7

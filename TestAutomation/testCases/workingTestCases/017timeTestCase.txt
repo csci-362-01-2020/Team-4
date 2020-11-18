@@ -1,7 +1,7 @@
-Id: 017
-Requirement: Must have active System Clock
-Component: org.eclipse.stem.core.model.STEMTime
-Method: addIncrement()
-Driver: org.eclipse.stem.test.driver.STEMtimetest.STEMtimetest
-Inputs: 0
-Oracles: true
+017
+Must have active System Clock
+org.eclipse.stem.core.model.STEMTime
+addIncrement()
+org.eclipse.stem.test.driver.STEMtimetest.STEMtimetest
+0
+true

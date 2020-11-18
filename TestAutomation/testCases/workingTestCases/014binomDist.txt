@@ -1,7 +1,7 @@
-Id: 014
-Requirement: Non-zero and Non-negative Inputs
-Component: org.eclipse.stem.core.math.BinomialDistributionUtil
-Method: fastPickFromBinomialDist()
-Driver: org.eclipse.stem.test.driver.binomDist.binomDist
-Inputs: .0, 500000
-Oracles: true
+014
+Non-zero and Non-negative Inputs
+org.eclipse.stem.core.math.BinomialDistributionUtil
+fastPickFromBinomialDist()
+org.eclipse.stem.test.driver.binomDist.binomDist
+.0, 500000
+true

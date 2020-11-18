@@ -1,7 +1,7 @@
-Id: 010
-Requirement: Parts per million check
-Component: org.eclipse.stem.analysis.impl.ReferenceScenarioDataMapImpl
-Method: closeEnough(double d1, double d2)
-Driver: org.eclipse.stem.test.driver.referencescenariodatamap.PartsPerMillionTestDriver
-Inputs: -2.000001, -2.000002
-Oracles: true
+010
+Parts per million check
+org.eclipse.stem.analysis.impl.ReferenceScenarioDataMapImpl
+closeEnough(double d1, double d2)
+org.eclipse.stem.test.driver.referencescenariodatamap.PartsPerMillionTestDriver
+-2.000001, -2.000002
+true
