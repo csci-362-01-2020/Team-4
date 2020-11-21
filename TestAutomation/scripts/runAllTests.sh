@@ -85,17 +85,15 @@ echo $header > reports/report.html
 # Compile drivers, supporting classes, and TestReporter.java
 cd project/src
 find -name "*.java" -print -a -exec javac -cp ".:../dependencies/*" {} \;
-cd org/eclipse/stem/test/driver/
-# Copy TestReporter.class to testCasesExecutables
-find -mindepth 1 -maxdepth 1 -type f \( -exec cp {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
-# Copy rest of drivers to testCasesExecutables
-find -mindepth 1 -maxdepth 1 -type d \( -exec cp -r {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
-# Remove unnecessary files
+# Copy .class files to testCasesExecutables
+cp org -r ../../testCasesExecutables
+# Remove .class files from src
 find -name "*.class" -exec rm {} \;
-cd ../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/
+# Remove .java files from testCasesExecutables
+cd ../../testCasesExecutables
 find -name "*.java" -exec rm {} \;
 # Back to top-level directory
-cd ../../../../../../
+cd ..
 
 # Execute test cases
 cd testCases/workingTestCases
