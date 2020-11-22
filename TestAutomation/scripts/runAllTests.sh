@@ -1,21 +1,5 @@
 #!/bin/bash
 
-# Build project
-cd scripts
-cd ../project/src
-find -name "*.java" -print -a -exec javac -cp ".:../dependencies/*" {} \;
-cd org/eclipse/stem/test/driver/
-# Copy TestReporter.class to testCasesExecutables
-find -mindepth 1 -maxdepth 1 -type f \( -exec cp {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
-# Copy rest of drivers to testCasesExecutables
-find -mindepth 1 -maxdepth 1 -type d \( -exec cp -r {} "../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/" \; \)
-# Remove unnecessary files
-find -name "*.class" -exec rm {} \;
-cd ../../../../../../../testCasesExecutables/org/eclipse/stem/test/driver/
-find -name "*.java" -exec rm {} \;
-# Back to scripts directory
-cd ../../../../../../scripts
-
 # Construct template for html report document
 header="<!DOCTYPE html>
 
@@ -96,50 +80,65 @@ table="
 
 "
 # Initialize html report document with header
-echo $header > ../reports/report.html
+echo $header > reports/report.html
 
-# Parse test cases for test execution and reporting
-cd ../testCases/workingTestCases
-readarray test_nums < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==1) print $0}' "$filename"; done)
-readarray requirements < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==2) print $0}' "$filename"; done)
-readarray components < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==3) print $0}' "$filename"; done)
-readarray methods < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==4) print $0}' "$filename"; done)
-readarray drivers < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==5) print $0}' "$filename"; done)
-readarray inputs < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==6) print $0}' "$filename"; done)
-readarray oracles < <(find -name "*.txt" | sort -k 11 | while IFS= read -r filename; do awk '{if(NR==7) print $0}' "$filename"; done)
-
-# Execute test cases and report
+# Compile drivers, supporting classes, and TestReporter.java
+cd project/src
+find -name "*.java" -print -a -exec javac -cp ".:../dependencies/*" {} \;
+# Copy .class files to testCasesExecutables
+cp org -r ../../testCasesExecutables
+# Remove .class files from src
+find -name "*.class" -exec rm {} \;
+# Remove .java files from testCasesExecutables
 cd ../../testCasesExecutables
-for ind in ${!drivers[@]}
-do	
-	# Parse results of find commands to get test case info
-	test_num=$(echo ${test_nums[ind]} | awk '{sub(/Id: /,"")} 1' );
-	requirement=$(echo ${requirements[ind]} | awk '{sub(/Requirement: /,"")} 1' );
-	component=$(echo ${components[ind]} | awk '{sub(/Component: /,"")} 1' );
-	method=$(echo ${methods[ind]} | awk '{sub(/Method: /,"")} 1' );
-	driver=$(echo ${drivers[ind]} | awk '{sub(/Driver: /,"")} 1' );
-	input=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1' | tr -d ',');
-	oracle=$(echo ${oracles[ind]} | awk '{sub(/Oracles: /,"")} 1' | tr -d ',');
-	input_for_display=$(echo ${inputs[ind]} | awk '{sub(/Inputs: /,"")} 1');
-	oracle_for_display=$(echo ${oracles[ind]} | awk '{sub(/Oracles: /,"")} 1');
+find -name "*.java" -exec rm {} \;
+# Back to top-level directory
+cd ..
 
+# Execute test cases
+cd testCases/workingTestCases
+for file in *; do
+	# Read test case file
+	i=0
+	while IFS= read -r line; do
+		test_case_info[$i]=$line
+		i=$i+1
+	done < $file
+	
+	# Instantiate variables for test case execution and report
+	test_num=${test_case_info[0]}
+	requirement=${test_case_info[1]}
+	component=${test_case_info[2]}
+	method=${test_case_info[3]}
+	driver_ps=${test_case_info[4]}
+	input_displayable=${test_case_info[5]}
+	oracle_displayable=${test_case_info[6]}
+	input_to_jvm=$(echo $input_displayable | tr -d ',')
+	oracle_to_jvm=$(echo $oracle_displayable | tr -d ',')
+	
 	# Run test and get results. Did the test pass or fail? What was the output?
-	readarray results < <(java -cp ".:../project/dependencies/*" $driver $input $oracle $test_num)
+	cd ../../testCasesExecutables
+	readarray results < <(java -cp ".:../project/dependencies/*" $driver_ps $input_to_jvm $oracle_to_jvm $test_num)
 	
 	# Substitute test case information for placeholders in html document
 	new_table=${table/number/$test_num}
 	new_table=${new_table/Passed_Failed/${results[0]}}
-	new_table=${new_table/driver/$driver}
+	new_table=${new_table/driver/$driver_ps}
 	new_table=${new_table/component/$component}
 	new_table=${new_table/method/$method}
 	new_table=${new_table/requirement/$requirement}
-	new_table=${new_table/test_input/$input_for_display}
-	new_table=${new_table/expected_result/$oracle_for_display}
+	new_table=${new_table/test_input/$input_displayable}
+	new_table=${new_table/expected_result/$oracle_displayable}
 	new_table=${new_table/computed_result/${results[1]}}
 	echo $new_table >> ../reports/report.html
+	
+	# Go back to testCases
+	cd ../testCases/workingTestCases
 done
 
-# Append footer to html report document and display
-echo $footer >> ../reports/report.html
-
-sensible-browser ../reports/report.html
+# Display in browser
+cd ../..
+echo $footer >> reports/report.html
+sensible-browser reports/report.html
+	
+	

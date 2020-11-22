@@ -1,10 +1,8 @@
-Id: 025
-Requirement: Squared edge Range
-Component: org.eclipse.stem.graphgenerators.PajekNetGraphGeneratorImplOld
-Method: getSqrdEdgeRange(double qx, double qy, Polygon p)
-Driver: org.eclipse.stem.test.driver.GetSqrdEdgeRange.GetSqrdEdgeRangeDriver
-Inputs: -11.65812885, 10, 4, -10, -10, -11, -11, -12, -12, -13, -13
-Oracles: 402.7494
-
-
+025
+Squared edge Range
+org.eclipse.stem.graphgenerators.PajekNetGraphGeneratorImplOld
+getSqrdEdgeRange(double qx, double qy, Polygon p)
+org.eclipse.stem.test.driver.GetSqrdEdgeRange.GetSqrdEdgeRangeDriver
+-11.65812885, 10, 4, -10, -10, -11, -11, -12, -12, -13, -13
+402.7494
 
