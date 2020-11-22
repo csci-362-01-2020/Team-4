@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.lang.reflect.*;
 
 import org.eclipse.stem.test.driver.TestReporter;
+import org.eclipse.stem.analysis.impl.ReferenceScenarioDataMapTestingFactory;
+import org.eclipse.stem.analysis.impl.ReferenceScenarioDataMapImpl;
 
 public class PartsPerMillionTestDriver {
-	private static double PPM = 1.0/1000000.0;
+
 	public static void main(String args[]) {
 		double d1 = Double.parseDouble(args[0]);
 		double d2 = Double.parseDouble(args[1]);
 		String oracle = args[2];
 		boolean oracleComparable = Boolean.parseBoolean(oracle);
-		TestReporter tr = new TestReporter();
 		
-		boolean retVal = true;
-		if(d1 == 0.0) retVal = (Math.abs(d2) < PPM);
-		if(d2 == 0.0) retVal = (Math.abs(d1) < PPM);
-		double diff = (Math.abs(2.0*(d1-d2)/(d1+d2)));
-		if(diff > PPM) retVal = false;
+		ReferenceScenarioDataMapTestingFactory rsdmTestingFactory = new ReferenceScenarioDataMapTestingFactory();
+		ReferenceScenarioDataMapImpl rsdm = rsdmTestingFactory.makeReferenceScenarioDataMap();
 		
+		boolean retVal = rsdmTestingFactory.testCloseEnough(rsdm, d1, d2);
+		TestReporter tr = new TestReporter();	
 		if (retVal == oracleComparable) {
 			tr.validate(true);
 		} else {
