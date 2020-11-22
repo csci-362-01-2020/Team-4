@@ -1,1 +1,3 @@
 TestAutomation/temp/*.txt
+TestAutomation/reports/*
+TestAutomation/reports/testCasesExecutables/*

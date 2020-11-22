@@ -41,7 +41,7 @@ import org.eclipse.stem.analysis.ErrorResult;
  */
 public class NelderMeadAlgorithm implements SimplexAlgorithm {
 
-	double ccoeff = 0.5;
+	double ccoeff = 0.5; // Fault injection: change to 0.1
 	double del;
 	double dn;
 	double dnn;
