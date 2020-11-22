@@ -16,7 +16,7 @@ This project utilizes the H/FOSS (Humanitarian / Free and Open Source Software) 
 Our project works with STEM in order to test segments of the STEM source code and return a test report based on the results. This guide will assume using a Debian-based version of Linux like Ubuntu or Mint with Bash, or a Debian-based Linux Subsystem (also with Bash).
 
 
-## Instillation
+## Installation
 
 Running our project does not require full instillation of Eclipse or STEM, although directions for setup will be provided at the end of this section.
 
@@ -58,11 +58,21 @@ sudo apt install openjdk-8-jdk
 
 1. Navigate to TestAutomation
 2. Run the script with ./scripts/runAllTests.sh
-3. The report document will be in .../TestAutomation/reports, but it will automatically be pulled up in Firefox
+3. The report document will be in TestAutomation/reports, but it will automatically be pulled up in Firefox
 4. Close the document to stop the process
 
 
+## Fault Injection
 
+Each of the faults can be injected in .java files under the project/src folder. We have included the package structure in order for you to navigate to the .java files.
+
+### org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
+
+Line 44: Change 0.5 to 0.1 (will cause test case 004 to fail)
+
+### org.eclipse.stem.analysis.impl.ReferenceScenarioDataMapImpl
+
+Line 911: Change Math.abs(2.0*(d1-d2)/(d1+d2)) to Math.abs(2.0*(d1+d2)/(d1-d2)) (will cause test cases 007 and 008 to fail)
 
 ## Authors and Acknowledgements
 
