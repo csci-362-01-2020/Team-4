@@ -67,7 +67,9 @@ public class BinomialDistributionUtil {
 	  **/ 
 	 public int fastPickFromBinomialDist(double p, int n){		 
 		 int result = 0; // default is the deterministic prediction
-		 if(p == 0) return result; // zero probability means fast pick is zero. Fixes problem where -1 was returned for some reasone (bug?)
+		 if(p == 0){
+		 p = p*100;
+		  return result;} // zero probability means fast pick is zero. Fixes problem where -1 was returned for some reasone (bug?)
 		 if(Double.isInfinite(p) || Double.isNaN(p)) return result;
 		 
 		 double rndVal = rand.nextDouble();
