@@ -66,6 +66,10 @@ sudo apt install openjdk-8-jdk
 
 Each of the faults can be injected in .java files under the project/src folder. We have included the package structure in order for you to navigate to the .java files.
 
+### org.eclipse.stem.graphgenerators.impl.PajekNetGraphGeneratorImplOld
+
+line 1022- remove - x (will cause all test cases to fail)
+
 ### org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
 
 Line 44: Change 0.5 to 0.1 (will cause test case 004 to fail)
