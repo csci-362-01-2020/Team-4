@@ -68,7 +68,7 @@ Each of the faults can be injected in .java files under the project/src folder. 
 
 ### org.eclipse.stem.graphgenerators.impl.PajekNetGraphGeneratorImplOld
 
-line 1022- remove - x (will cause all test cases to fail)
+line 1022: remove "- x" (will cause all test cases to fail)
 
 ### org.eclipse.stem.analysis.automaticexperiment.NelderMeadAlgorithm
 
