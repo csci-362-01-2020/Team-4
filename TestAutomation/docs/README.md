@@ -20,7 +20,14 @@ Our project works with STEM in order to test segments of the STEM source code an
 
 Running our project does not require full instillation of Eclipse or STEM, although directions for setup will be provided at the end of this section.
 
-To run this testing project, all that is required is to make a local copy of our repository, navigate to "TestAutomation", and the command to run the project is ```./scripts/runAllTests.sh```
+To run this testing project, you must first install Java version 8 (if not already installed). This can be done by running the following command:
+```
+sudo apt install openjdk-8-jdk
+```
+
+The STEM project is built and runs on Java 8, so the project will not run as expected if you only have later versions.
+
+After Java 8 is installed, all that is required is to make a local copy of our repository, navigate to "TestAutomation", and the command to run the project is ```./scripts/runAllTests.sh```
 
 All .jar files needed to run our specific test cases are included in the package structure at ```TestAutomation/project/dependencies/``` and further .jar files could be added as necessary to include more testing drivers. Test drivers can be found at ```TestAutomation/project/src/org/eclipse/stem/test/driver/``` with a sub-directory provided for each class tested.
 
@@ -80,9 +87,12 @@ Line 911: Change Math.abs(2.0*(d1-d2)/(d1+d2)) to Math.abs(2.0*(d1+d2)/(d1-d2)) 
 
 ## Authors and Acknowledgements
 
+Noah Drake  
+Chloe Harris  
+Tristan Lawler  
+Ryan Ratliffe  
 
-
-
+[STEM wiki](https://www.eclipse.org/stem/)  
 
 
 ## License
