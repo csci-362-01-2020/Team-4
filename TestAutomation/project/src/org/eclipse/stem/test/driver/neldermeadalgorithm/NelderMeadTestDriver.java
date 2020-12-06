@@ -76,7 +76,7 @@ public class NelderMeadTestDriver {
                  	 return res;
        		 }
 	}
-	
+	// Credit to Eclipse Foundation
 	static class SampleFunction2 implements SimplexFunction {
 
                 public ErrorResult getValue(double[] parameters) {
