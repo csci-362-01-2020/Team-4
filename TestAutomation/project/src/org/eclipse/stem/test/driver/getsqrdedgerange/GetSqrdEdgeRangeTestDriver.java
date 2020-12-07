@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import org.eclipse.stem.test.driver.TestReporter;
 import java.lang.Math.*;
 import org.eclipse.stem.graphgenerators.impl.*;
+//Tests GetSqrdEdgeRange, which gets the minimal range between two points on a polygon 
 public class GetSqrdEdgeRangeDriver {
 
 	public static void main(String args[]) {
