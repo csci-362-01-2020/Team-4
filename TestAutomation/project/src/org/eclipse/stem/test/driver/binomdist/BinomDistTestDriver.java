@@ -1,5 +1,6 @@
 package org.eclipse.stem.test.driver.binomDist;
 import java.util.Random;
+import java.util.*;
 import org.eclipse.stem.core.model.ModelFactory;
 import org.eclipse.stem.core.model.STEMTime;
 import org.apache.commons.math3.random.JDKRandomGenerator;
@@ -21,7 +22,7 @@ public class BinomDistTestDriver{
 		//calls the method we are testing and tests the output
 		BinomialDistributionUtil binom = new BinomialDistributionUtil(1000);
 		int result = binom.fastPickFromBinomialDist(testP, testN);
-		validResult = ((-1<result)&&(result<testN+1));
+		validResult = ((result>-1)&&(result>testN));
 		
 		//sends results off to the report
 		TestReporter tr = new TestReporter();
