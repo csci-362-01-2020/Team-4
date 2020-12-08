@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EObject;
 
 
-public class STEMtimetest{
+public class STEMTimeTestDriver{
 
 	public static void main(String[] args) {
 		//parses command line args into usable variables

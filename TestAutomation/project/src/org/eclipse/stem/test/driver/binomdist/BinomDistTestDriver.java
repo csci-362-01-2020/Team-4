@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 
-public class binomDist{
+public class BinomDistTestDriver{
 	public static void main(String[] args) {
 		//parses command line args into variables to be used
 		double testP = Double.parseDouble(args[0]);
