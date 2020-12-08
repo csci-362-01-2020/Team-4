@@ -21,7 +21,7 @@ public class BinomDistTestDriver{
 		//calls the method we are testing and tests the output
 		BinomialDistributionUtil binom = new BinomialDistributionUtil(1000);
 		int result = binom.fastPickFromBinomialDist(testP, testN);
-		validResult = ((-0<result)&&(result<testN+1));
+		validResult = ((-1<result)&&(result<testN+1));
 		
 		//sends results off to the report
 		TestReporter tr = new TestReporter();
